@@ -5,12 +5,14 @@ import styles from '../styles/Home.module.css'
 import ActionAreaCard from '../components/Card'
 
 export default function Home() {
-  const [animeList, setAnimeList] = useState([])
+  const [animeList, setAnimeList] = useState()
 
   const getAnime = async () => {
     const response = await axios.get('https://api.jikan.moe/v4/anime')
 
     setAnimeList(response.data)
+    console.log(response.data)
+    
   }
 
   useEffect(() => {
@@ -21,12 +23,12 @@ export default function Home() {
       
 
       <div >
-        {animeList?.map((anime) => (
+        { animeList?.map((animes) => (
           <Card
-            key={anime.id}
-            id={anime.id}
-            titulo={anime.titles.title}
-            image={anime.images.jpg.image_url}
+            key={animes.mal_id}
+            id={animes.mal_id}
+            titulo={animes.titles.title}
+            image={animes.images.jpg.image_url}
           ></Card>
         ))}
       </div>    
